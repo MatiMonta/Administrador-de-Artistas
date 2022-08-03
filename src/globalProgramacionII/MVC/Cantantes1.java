@@ -13,6 +13,8 @@ import globalProgramacionII.Artista;
 import globalProgramacionII.Canario;
 import globalProgramacionII.Gallo;
 import globalProgramacionII.MVC.Modelo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -150,6 +152,11 @@ public class Cantantes1 extends javax.swing.JDialog {
         jPanel1.add(instrumentoT, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 140, 20));
 
         eliminarBoton.setLabel("Eliminar");
+        eliminarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarBotonActionPerformed(evt);
+            }
+        });
         jPanel1.add(eliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
 
         modificarBoton.setLabel("Modificar");
@@ -244,8 +251,6 @@ public class Cantantes1 extends javax.swing.JDialog {
                             horarioT.setText(g.cuando.tipo);
                         }
                     }
-    
-                
             }
         }
     }//GEN-LAST:event_cajaCantantesItemStateChanged
@@ -260,6 +265,36 @@ public class Cantantes1 extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_salirBotonActionPerformed
+
+    private void eliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBotonActionPerformed
+        eliminarBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Artista> a= model.art.getDatos();
+            for (Artista artista : a) {
+                if(cajaCantantes.getSelectedItem().equals(artista.nombre))
+                {
+                    model.art.borrarDato(artista);
+                }
+            }
+        ArrayList<Canario> canario= model.can.getDatos();
+            for (Canario c : canario) {
+                if(cajaCantantes.getSelectedItem().equals(c.nombre))
+                {
+                    model.can.borrarDato(c);
+                }
+            }
+        ArrayList<Gallo> gallo= model.gall.getDatos();
+            for (Gallo g : gallo) {
+                if(cajaCantantes.getSelectedItem().equals(g.nombre))
+                {
+                    model.gall.borrarDato(g);
+                }
+            }
+                JOptionPane.showMessageDialog(null, "Eliminado con Exito");
+            }
+        });
+    }//GEN-LAST:event_eliminarBotonActionPerformed
 
     /**
      * @param args the command line arguments
